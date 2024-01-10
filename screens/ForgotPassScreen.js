@@ -69,12 +69,16 @@ const styles = StyleSheet.create( {
         backgroundColor: "white",
         paddingVertical: 10,
         paddingHorizontal: 15,
+        borderColor: "black",
+        borderWidth: 3,
         borderRadius: 5,
+        marginBottom: 3
       },
       buttonText: {
         marginLeft: 5,
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'bold',
+        
         color: "black",
       },
 }
