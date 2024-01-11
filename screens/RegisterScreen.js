@@ -1,15 +1,13 @@
-
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput, CheckBox, TouchableOpacity, Alert, ScrollView, } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-// import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, Text, View, ImageBackground, TextInput, CheckBox, TouchableOpacity, Alert, ScrollView, Modal, } from 'react-native';
+
 
 export default function RegisterScreen({navigation}) {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
         birthDate: '',
-        sex: 'male',
+        sex: ['Male', 'Female', 'Others'],
         email: '',
         phoneNumber: '',
         password: '',
@@ -20,12 +18,21 @@ export default function RegisterScreen({navigation}) {
       const handleRegistration = () => {
         if (user.password === confirmPassword || (user.password == null && confirmPassword === '')) {
           // Handle registration logic here
-          Alert.alert('Registration successful');
+          // Alert.alert('Registration successful');
         } else {
           Alert.alert('Password and confirm password values do not match.');
         }
   }
-  
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('Gender');
+
+
+  const handleOptionSelect = (gender) => {
+    setSelectedValue(gender);
+    setModalVisible(false);
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground source={require('../assets/bg.jpg')} style={styles.backgroundImage}>
@@ -65,18 +72,46 @@ export default function RegisterScreen({navigation}) {
             value={user.birthDate}
             onChangeText={(text) => setUser({ ...user, birthDate: text })}
           />
+
         </View>
         <View style={styles.inputGroup}>
-          {/* <Picker
-            style={{...styles.input, ...styles.picker}}
-            selectedValue={user.sex}
-            onValueChange={(value) => setUser({ ...user, sex: value })}
-            itemStyle={{color:"black", fontSize: 20, fontWeight: "bold"}}
+
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <View style={styles.input}>
+          <Text>{selectedValue}</Text>
+        </View>
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}>
+         <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',}}
           >
-            <Picker.Item label="Male ♂" value="male"/>
-            <Picker.Item label="Female ♀" value="female" />
-            <Picker.Item label="Other" value="other" />
-          </Picker> */}
+          <View style={{ width: 200, padding: 10, backgroundColor: '#fff' }}>
+            {user.sex.map((gender, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleOptionSelect(gender)}>
+                <View
+                  style={{
+                    padding: 10,
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#ccc', }}
+                  >
+                  <Text>{gender}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </Modal>
         </View>
       </View>
 
@@ -123,7 +158,7 @@ export default function RegisterScreen({navigation}) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={handleRegistration} >
+        onPress={handleRegistration}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
 

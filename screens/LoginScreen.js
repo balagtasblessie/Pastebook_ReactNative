@@ -7,14 +7,6 @@ export default function LoginScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const Create = () => {
-    // Add your custom logic when the text is clicked
-    Alert.alert('Create Account');
-  };
-  const Forgot = () => {
-    // Add your custom logic when the text is clicked
-    Alert.alert('Forgot Pass');
-  };
   const [errors, setErrors] = useState({})
   const validateForm = () => {
     let errors ={};
