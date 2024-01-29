@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
-// import { CheckBox } from 'react-native-elements';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, Alert, ScrollView, Dimensions} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useAuth, authContext} from '../../context/authContext';
 
 export default function LoginScreen({navigation}) {
+
+  const {login} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [hidePassword,setHidePassword] = useState(password)
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({})
   const validateForm = () => {
@@ -19,21 +22,22 @@ export default function LoginScreen({navigation}) {
     return Object.keys(errors).length === 0;
   }
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      console.log("Submitted", email, password);
-      setEmail("");
-      setPassword("");
-      setErrors("");
-    }
-  }
+  // const handleSubmit = () => {
+  //   if (validateForm()) {
+  //     console.log("Submitted", email, password);
+  //     setEmail("");
+  //     setPassword("");
+  //     setErrors("");
+  //   }
+  // }
   
   return (
+
     <ScrollView contentContainerStyle={styles.container}>
-      <ImageBackground source={require('../assets/bg.jpg')} style={styles.backgroundImage}>
-        {/* Your background image content goes here */}
+      <ImageBackground source={require('../../assets/bg.jpg')} style={styles.backgroundImage}>
       </ImageBackground>
       <View style={styles.centeredContainer}>
+        
        <Text 
         style={styles.textTitle}>Login Account</Text>
         <Text 
@@ -67,9 +71,10 @@ export default function LoginScreen({navigation}) {
         <Text style={styles.errorText}>{errors.password}</Text>
       ): null}
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
       <FontAwesome name="key" size={20} color="white" />
-      <Text style={styles.buttonText}> LOGIN</Text>
+      <Text style={styles.buttonText}
+            > LOGIN</Text>
     </TouchableOpacity>
 
     <Text 
@@ -98,6 +103,15 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   centeredContainer: {
+    position: 'absolute',
+    backgroundColor: "#3373B0",
+    width: '70%',
+    alignSelf: "center",
+    height: '100%',
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  landscapeContainer: {
     position: 'absolute',
     backgroundColor: "#3373B0",
     width: '70%',
