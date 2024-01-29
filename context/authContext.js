@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
       });
       return result.data.result;
     }catch (error) {
-      console.error('Error during registration:', error.response);
+      console.error('Error during registration:', error.response);//CHECK MO TO: MADALAS NANDITO UNG ERROR DETAILS
       return error.response.data.result;
     }
     
