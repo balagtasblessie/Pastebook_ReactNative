@@ -71,7 +71,7 @@ export default function RegisterScreen({ navigation }) {
 
         console.log('Calling register function...');
         const result = register ? await register(firstName, lastName, email, password, dateOfBirth, gender, phoneNumber) : undefined;
-        
+
         console.log('Registration result:', result);
 
         if (result === "User Registered Successfully") {
@@ -167,9 +167,9 @@ export default function RegisterScreen({ navigation }) {
                 <DatePicker
                   mode="calendar"
                   minimumDate={startDate}
-                  selected={dateOfBirth}  // Use dateOfBirth here
+                  selected={dateOfBirth.toISOString()}  // Convert Date to string
                   onDateChanged={handleChangeStartDate}  // Consider renaming this function for clarity
-                  onSelectedChange={date => setDateOfBirth(date)}
+                  onSelectedChange={date => setDateOfBirth(new Date(date))}
                   options={{
                     backgroundColor: "#080516",
                     textHeaderColor: "#469ab6",
