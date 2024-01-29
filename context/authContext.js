@@ -62,9 +62,11 @@ const AuthProvider = ({ children }) => {
         phoneNumber,
       });
       return result.data.result;
-    } catch (error) {
+    }catch (error) {
+      console.error('Error during registration:', error.response);
       return error.response.data.result;
     }
+    
   };
 
   const login = async (email, password) => {

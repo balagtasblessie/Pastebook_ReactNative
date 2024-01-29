@@ -76,7 +76,7 @@ const NewsfeedScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Logo1_dark.png')} style={{width:"60%", height:60, marginTop: 30, marginBottom:10, alignSelf:"center"}}></Image>
+      {/* <Image source={require('../../assets/Logo1_dark.png')} style={{width:"60%", height:60, marginTop: 30, marginBottom:10, alignSelf:"center"}}></Image> */}
       <View style={styles.inputContainer}>
       <TextInput
           placeholder="What's on your mind?"

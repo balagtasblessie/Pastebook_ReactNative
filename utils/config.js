@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const BASE_URL = 'http://192.168.100.154:7208' // sa bahay
+export const BASE_URL = 'http://192.168.55.102:7208' // sa bahay
 
 export const Storage = {
     setItem: async (key, value) => {
