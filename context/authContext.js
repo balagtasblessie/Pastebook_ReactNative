@@ -38,6 +38,7 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
+    setLoading(false);
 
     loadToken();
   }, []);
@@ -77,7 +78,7 @@ const AuthProvider = ({ children }) => {
         setAuthState(true);
 
         axios.defaults.headers.common['Authorization'] = result.data.token;
-        await AsyncStorage.setItem('userToken', result.data.token); // Use AsyncStorage.setItem
+        await AsyncStorage.setItem('userToken', result.data.token); 
         await AsyncStorage.setItem('userId', result.data.userId);
       }
 

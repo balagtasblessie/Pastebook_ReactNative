@@ -5,6 +5,8 @@ import { getFormatedDate } from "react-native-modern-datepicker";
 import { AuthContext, useAuth } from "../../context/authContext"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Storage } from '../../utils/config';
+import { DatePickerComponent } from '../components/DatePickerComponent'; 
+
 
 export default function RegisterScreen({ navigation }) {
   // const [user, setUser] = useState({
@@ -23,7 +25,7 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
   const genderOptions = ['Male', 'Female', 'Others']
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [dateOfBirth, setDateOfBirth] = useState(new Date('1990-01-01'));
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [VerificationCode, setVerificationCode] = useState('');
@@ -156,7 +158,7 @@ export default function RegisterScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Modal
+          {/* <Modal
             animationType='slide'
             transparent={true}
             visible={openStartDatePicker}
@@ -168,7 +170,7 @@ export default function RegisterScreen({ navigation }) {
                   mode="calendar"
                   minimumDate={startDate}
                   selected={dateOfBirth.toISOString()}  // Convert Date to string
-                  onDateChanged={handleChangeStartDate}  // Consider renaming this function for clarity
+                  onDateChanged={handleChangeStartDate}
                   onSelectedChange={date => setDateOfBirth(new Date(date))}
                   options={{
                     backgroundColor: "#080516",
@@ -187,7 +189,11 @@ export default function RegisterScreen({ navigation }) {
               </View>
             </View>
 
-          </Modal>
+          </Modal> */}
+          <DatePickerComponent
+            dateOfBirth={dateOfBirth}
+            setDateOfBirth={setDateOfBirth}
+            isDateOfBirthValid={isDateOfBirthValid} />
 
           <View style={styles.inputGroup}>
 
@@ -197,7 +203,7 @@ export default function RegisterScreen({ navigation }) {
               </View>
             </TouchableOpacity>
 
-            <Modal
+            {/* <Modal
               animationType="fade"
               transparent={true}
               visible={modalVisible}
@@ -228,7 +234,7 @@ export default function RegisterScreen({ navigation }) {
                   ))}
                 </View>
               </View>
-            </Modal>
+            </Modal> */}
           </View>
         </View>
 
